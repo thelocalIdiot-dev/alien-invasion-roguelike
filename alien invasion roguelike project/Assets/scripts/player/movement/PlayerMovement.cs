@@ -35,8 +35,8 @@ public class playerMovement : MonoBehaviour
     public bool canDoubleJump;
     public bool readyToJump;
     [Header("input")]
-    float horizontalInput;
-    float verticalInput;
+    public float horizontalInput;
+    public float verticalInput;
     bool jumping;
     [Header("----------REFRENCES----------")]
     public Transform orientation;
@@ -119,7 +119,7 @@ public class playerMovement : MonoBehaviour
             States = STATES.sliding;
             desiredMoveSpeed = slideSpeed;
             CameraEffects.instance.changeFOV(CameraEffects.instance.slidingFOV, 0.25f);
-            CameraEffects.instance.tilt(CameraEffects.instance.slidingTilt, 0.25f);
+            CameraEffects.instance.tilt(CameraEffects.instance.slidingTilt * horizontalInput, 0.25f);
         }
         else if (dashing)
         {
@@ -189,11 +189,11 @@ public class playerMovement : MonoBehaviour
             horizontalInput = Input.GetAxisRaw("Horizontal");
             verticalInput = Input.GetAxisRaw("Vertical");
         }
-        else
-        {
-            horizontalInput = 0;
-            verticalInput = 0;
-        }
+        //else
+        //{
+        //    horizontalInput = 0;
+        //    verticalInput = 0;
+        //}
 
         if (Input.GetKey(KeyCode.Space) && grounded() && readyToJump)
         {
