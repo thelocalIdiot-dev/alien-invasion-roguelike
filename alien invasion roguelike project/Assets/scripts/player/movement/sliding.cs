@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class sliding : MonoBehaviour
@@ -23,7 +24,7 @@ public class sliding : MonoBehaviour
     public KeyCode slideKey = KeyCode.LeftControl;
     private float horizontalInput;
     private float verticalInput;
-
+    Vector3 inputDirection;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -48,9 +49,6 @@ public class sliding : MonoBehaviour
 
         if (Input.GetKeyDown(slideKey) && !pm.grounded())
             rb.velocity = new Vector3(rb.velocity.x, -12, rb.velocity.z);
-
-        
-
     }
 
     private void FixedUpdate()
@@ -66,13 +64,12 @@ public class sliding : MonoBehaviour
         transform.DOScale(new Vector3(transform.localScale.x, slideYScale, transform.localScale.z), 0.25f);
         rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
 
+        inputDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         slideTimer = maxSlideTime;
     }
 
     private void SlidingMovement()
     {
-        Vector3 inputDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-
         if (!pm.OnSlope() || rb.velocity.y > -0.1f)
         {
             rb.AddForce(inputDirection.normalized * slideForce, ForceMode.Force);

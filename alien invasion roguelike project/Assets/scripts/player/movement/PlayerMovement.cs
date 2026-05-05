@@ -41,6 +41,7 @@ public class playerMovement : MonoBehaviour
     [Header("----------REFRENCES----------")]
     public Transform orientation;
     public Rigidbody rb;
+    public TextMeshProUGUI speedText;
     [Header("----------STATES----------")]
     public bool sliding;
     public bool dashing;
@@ -96,6 +97,11 @@ public class playerMovement : MonoBehaviour
         GetInput();
         stateHandler();
 
+        if(speedText != null )
+        {
+            speedText.SetText(rb.velocity.magnitude.ToString());
+        }
+
         if (States == STATES.idle || States == STATES.walking)
         {
             rb.drag = groundDrag;
@@ -150,29 +156,6 @@ public class playerMovement : MonoBehaviour
             CameraEffects.instance.tilt(CameraEffects.instance.strafTilt * -horizontalInput, 0.25f);
         }
 
-        if (moveSpeed != 0)
-        {
-            StartCoroutine(smoothlyChangeSpeed());
-        }
-        else
-        {
-            moveSpeed = desiredMoveSpeed;
-        }
-    }
-
-    private IEnumerator smoothlyChangeSpeed()
-    {
-        float time = 0f;
-        float difference = Mathf.Abs(desiredMoveSpeed - moveSpeed);
-        float startValue = moveSpeed;
-
-        while (time < difference)
-        {
-            moveSpeed = Mathf.Lerp(startValue, desiredMoveSpeed, time / difference);
-            time += Time.deltaTime;
-            yield return null;
-        }
-
         moveSpeed = desiredMoveSpeed;
     }
 
@@ -189,11 +172,7 @@ public class playerMovement : MonoBehaviour
             horizontalInput = Input.GetAxisRaw("Horizontal");
             verticalInput = Input.GetAxisRaw("Vertical");
         }
-        //else
-        //{
-        //    horizontalInput = 0;
-        //    verticalInput = 0;
-        //}
+        
 
         if (Input.GetKey(KeyCode.Space) && grounded() && readyToJump)
         {
@@ -236,16 +215,20 @@ public class playerMovement : MonoBehaviour
 
         if (OnSlope() && !exitingSlope)
         {
-            rb.AddForce(GetSlopeMoveDirection(moveDir) * moveSpeed * 20f, ForceMode.Force);
+            rb.AddForce(GetSlopeMoveDirection(moveDir) * moveSpeed * 10f, ForceMode.Force);
 
             if (rb.velocity.y < 0)
                 rb.AddForce(Vector3.down * 80f, ForceMode.Force);
         }
-
-        if (grounded())
-            rb.AddForce(moveDir.normalized * moveSpeed * 10, ForceMode.Force);
         else
-            rb.AddForce(moveDir.normalized * moveSpeed * 10 * airMultiplier, ForceMode.Force);
+        {
+            if (grounded())
+                rb.AddForce(moveDir.normalized * moveSpeed * 10, ForceMode.Force);
+            else
+                rb.AddForce(moveDir.normalized * moveSpeed * 10 * airMultiplier, ForceMode.Force);
+        }
+
+        
 
         rb.useGravity = !OnSlope() && !dashing;
     }
@@ -283,6 +266,7 @@ public class playerMovement : MonoBehaviour
                 if (flatVel.magnitude > moveSpeed)
                 {
                     Vector3 limitedVel = flatVel.normalized * moveSpeed;
+                    Debug.Log(limitedVel);
                     rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
                 }
             }

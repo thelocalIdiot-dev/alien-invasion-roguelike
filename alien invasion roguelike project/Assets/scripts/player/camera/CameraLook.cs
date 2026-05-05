@@ -30,7 +30,10 @@ public class CameraLook : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(xRotation, desiredX, 0);
 
-        orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
+        if (!playerMovement.instance.sliding)
+        {
+            orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
+        }
         transform.position = player.position;
     }    
 }
