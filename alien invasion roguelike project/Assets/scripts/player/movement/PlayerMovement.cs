@@ -102,15 +102,15 @@ public class playerMovement : MonoBehaviour
             speedText.SetText(rb.velocity.magnitude.ToString());
         }
 
-        if (States == STATES.idle || States == STATES.walking)
+        if (States == STATES.idle)
         {
             rb.drag = groundDrag;
         }
-        else if (States != STATES.idle && States != STATES.walking)
+        else
         {
             rb.drag = 0f;
         }
-
+       
         if (Input.GetKeyDown(KeyCode.P))
         {
             restartGame();
@@ -218,17 +218,12 @@ public class playerMovement : MonoBehaviour
             rb.AddForce(GetSlopeMoveDirection(moveDir) * moveSpeed * 10f, ForceMode.Force);
 
             if (rb.velocity.y < 0)
-                rb.AddForce(Vector3.down * 80f, ForceMode.Force);
+                rb.AddForce(Vector3.down * 800f, ForceMode.Force);
         }
+        if (grounded())
+            rb.AddForce(moveDir.normalized * moveSpeed * 10, ForceMode.Force);
         else
-        {
-            if (grounded())
-                rb.AddForce(moveDir.normalized * moveSpeed * 10, ForceMode.Force);
-            else
-                rb.AddForce(moveDir.normalized * moveSpeed * 10 * airMultiplier, ForceMode.Force);
-        }
-
-        
+            rb.AddForce(moveDir.normalized * moveSpeed * 10 * airMultiplier, ForceMode.Force);
 
         rb.useGravity = !OnSlope() && !dashing;
     }
@@ -266,7 +261,6 @@ public class playerMovement : MonoBehaviour
                 if (flatVel.magnitude > moveSpeed)
                 {
                     Vector3 limitedVel = flatVel.normalized * moveSpeed;
-                    Debug.Log(limitedVel);
                     rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
                 }
             }

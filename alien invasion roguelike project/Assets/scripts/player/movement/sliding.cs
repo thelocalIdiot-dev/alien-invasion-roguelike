@@ -16,6 +16,7 @@ public class sliding : MonoBehaviour
     public float maxSlideTime;
     public float slideForce;
     private float slideTimer;
+    public float SlideStartDistance;
 
     public float slideYScale;
     private float startYScale;
@@ -41,14 +42,18 @@ public class sliding : MonoBehaviour
             verticalInput = Input.GetAxisRaw("Vertical");
         }
 
-        if (Input.GetKeyDown(slideKey) && (horizontalInput != 0 || verticalInput != 0))
-            StartSlide();
+        bool canSlide = Physics.Raycast(transform.position, Vector3.down, SlideStartDistance, pm.WhatIsGround);
+        Debug.Log(canSlide);
 
-        if (Input.GetKeyUp(slideKey) && pm.sliding)
+        if (Input.GetKeyDown(slideKey) && (horizontalInput != 0 || verticalInput != 0) && canSlide)
+        {
+            StartSlide();
+            rb.velocity = new Vector3(rb.velocity.x, -12, rb.velocity.z);
+        }
+
+        if (Input.GetKeyUp(slideKey) && pm.sliding || Input.GetKey(KeyCode.Space) && pm.grounded() && pm.readyToJump)
             StopSlide();
 
-        if (Input.GetKeyDown(slideKey) && !pm.grounded())
-            rb.velocity = new Vector3(rb.velocity.x, -12, rb.velocity.z);
     }
 
     private void FixedUpdate()
@@ -76,7 +81,6 @@ public class sliding : MonoBehaviour
 
             slideTimer -= Time.deltaTime;
         }
-
         else
         {
             rb.AddForce(pm.GetSlopeMoveDirection(inputDirection) * slideForce, ForceMode.Force);
@@ -91,5 +95,11 @@ public class sliding : MonoBehaviour
         pm.sliding = false;
 
         transform.DOScale(new Vector3(transform.localScale.x, startYScale, transform.localScale.z), 0.25f);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * SlideStartDistance);
     }
 }
