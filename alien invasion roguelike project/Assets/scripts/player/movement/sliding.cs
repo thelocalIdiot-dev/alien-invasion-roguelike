@@ -11,6 +11,7 @@ public class sliding : MonoBehaviour
     private Rigidbody rb;
     private playerMovement pm;
     public GameObject legs;
+    public ParticleSystem slideEffect;
 
     [Header("Sliding")]
     public float maxSlideTime;
@@ -54,6 +55,16 @@ public class sliding : MonoBehaviour
         if (Input.GetKeyUp(slideKey) && pm.sliding || Input.GetKey(KeyCode.Space) && pm.grounded() && pm.readyToJump)
             StopSlide();
 
+        bool effect = pm.sliding && pm.grounded();
+        
+        if(effect)
+        {
+            slideEffect.Play();
+        }
+        else
+        {
+            slideEffect.Stop();
+        }
     }
 
     private void FixedUpdate()

@@ -112,16 +112,16 @@ public class gun : MonoBehaviour
         {
             SpawnImpact(impactEffect, hit);
 
-            //if (hit.transform.TryGetComponent(out EnemyHealth enemy))
-            //{
-            //    enemy.TakeDamage(hit.point, damage);
-            //    CameraShaker.Instance.ShakeOnce(hitShakePower, 0.5f, 0, hitShakeDuration);
-            //    StartCoroutine(HitFlashRoutine());
-            //}
-            //else
-            //{
-            //    CameraShaker.Instance.ShakeOnce(shootShakePower, 0.5f, 0, shootShakeDuration);
-            //}
+            if (hit.transform.TryGetComponent(out EnemyHealth enemy))
+            {
+                enemy.TakeDamage(hit.point, damage);
+                //CameraShaker.Instance.ShakeOnce(hitShakePower, 0.5f, 0, hitShakeDuration);
+                StartCoroutine(HitFlashRoutine());
+            }
+            else
+            {
+                //CameraShaker.Instance.ShakeOnce(shootShakePower, 0.5f, 0, shootShakeDuration);
+            }
 
             if (hit.transform.TryGetComponent(out Rigidbody EnemyRB))
             {
