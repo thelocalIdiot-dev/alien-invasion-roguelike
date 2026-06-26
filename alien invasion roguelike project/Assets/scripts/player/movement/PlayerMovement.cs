@@ -5,6 +5,7 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -42,6 +43,7 @@ public class playerMovement : MonoBehaviour
     public Transform orientation;
     public Rigidbody rb;
     public TextMeshProUGUI speedText;
+    public Animator animator;
     [Header("----------STATES----------")]
     public bool sliding;
     public bool dashing;
@@ -96,7 +98,7 @@ public class playerMovement : MonoBehaviour
     {
         GetInput();
         stateHandler();
-
+        playerAnimation();
         if(speedText != null )
         {
             speedText.SetText(rb.velocity.magnitude.ToString());
@@ -115,6 +117,17 @@ public class playerMovement : MonoBehaviour
         {
             restartGame();
         }
+    }
+
+    void playerAnimation()
+    {
+        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+        animator.SetFloat("Speed", flatVel.magnitude / runSpeed);
+        animator.SetFloat("Y speed", rb.velocity.y);
+        animator.SetBool("grounded", grounded());
+        animator.SetBool("sliding", sliding);
+
     }
 
     void stateHandler()

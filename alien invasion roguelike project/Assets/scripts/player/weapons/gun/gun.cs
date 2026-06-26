@@ -110,8 +110,7 @@ public class gun : MonoBehaviour
 
         if (Physics.Raycast(cam.transform.position, bulletSpread, out RaycastHit hit, range))
         {
-            SpawnImpact(impactEffect, hit);
-
+            
             if (hit.transform.TryGetComponent(out EnemyHealth enemy))
             {
                 enemy.TakeDamage(hit.point, damage);
@@ -120,11 +119,13 @@ public class gun : MonoBehaviour
             }
             else
             {
+                SpawnImpact(impactEffect, hit);
                 //CameraShaker.Instance.ShakeOnce(shootShakePower, 0.5f, 0, shootShakeDuration);
             }
 
             if (hit.transform.TryGetComponent(out Rigidbody EnemyRB))
             {
+                SpawnImpact(impactEffect, hit);
                 EnemyRB.AddForce(bulletSpread * knockBack, ForceMode.Impulse);
             }
 
@@ -160,6 +161,7 @@ public class gun : MonoBehaviour
     private void SpawnImpact(GameObject effect, RaycastHit hit)
     {
         GameObject impact = Instantiate(effect, hit.point, Quaternion.LookRotation(hit.normal));
+        Debug.Log(hit.transform.name);
         Destroy(impact, 0.7f);
     }
 

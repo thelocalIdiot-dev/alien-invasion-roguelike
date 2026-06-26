@@ -4,36 +4,35 @@ using UnityEngine;
 
 public class CameraLook : MonoBehaviour
 {
-    private float xRotation;
-    public float sensitivity = 50f;
-    private float sensMultiplier = 1f;
+    [Header("References")]
     public Transform orientation;
     public Transform player;
+    public Transform playerObj;
+    public Rigidbody rb;
 
-    private float desiredX;
+    public float rotationSpeed;
 
-    void Start()
+
+
+    private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
-    void Update()
+    private void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
-        float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
 
-        Vector3 rot = transform.localRotation.eulerAngles;
-        desiredX = rot.y + mouseX;
+        // rotate orientation
+        Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
+        orientation.forward = viewDir.normalized;
 
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+        Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        transform.localRotation = Quaternion.Euler(xRotation, desiredX, 0);
+        if (inputDir != Vector3.zero)
+            playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
 
-        if (!playerMovement.instance.sliding)
-        {
-            orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
-        }
-        transform.position = player.position;
-    }    
+    }  
 }

@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class speedLines : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float decrease;
 
-    // Update is called once per frame
+    public float Time;
     void Update()
-    {
-        
+    {            
+        Vector3 desiredPos = playerMovement.instance.transform.position + playerMovement.instance.rb.velocity * decrease;
+
+        if (playerMovement.instance.transform.GetComponent<sliding>().effect)
+        {
+            GetComponent<ParticleSystem>().Play();
+        }
+        else
+        {
+            GetComponent<ParticleSystem>().Stop();
+        }
+
+
+        transform.position = desiredPos;
+
+        transform.LookAt(playerMovement.instance.transform.position);
     }
 }

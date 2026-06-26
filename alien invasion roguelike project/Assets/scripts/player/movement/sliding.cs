@@ -19,20 +19,17 @@ public class sliding : MonoBehaviour
     private float slideTimer;
     public float SlideStartDistance;
 
-    public float slideYScale;
-    private float startYScale;
 
     [Header("Input")]
     public KeyCode slideKey = KeyCode.LeftControl;
     private float horizontalInput;
     private float verticalInput;
     Vector3 inputDirection;
+    [HideInInspector] public bool effect;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         pm = GetComponent<playerMovement>();
-
-        startYScale = transform.localScale.y;
     }
 
     private void Update()
@@ -55,7 +52,7 @@ public class sliding : MonoBehaviour
         if (Input.GetKeyUp(slideKey) && pm.sliding || Input.GetKey(KeyCode.Space) && pm.grounded() && pm.readyToJump)
             StopSlide();
 
-        bool effect = pm.sliding && pm.grounded();
+        effect = pm.sliding && pm.grounded();
         
         if(effect)
         {
@@ -77,7 +74,6 @@ public class sliding : MonoBehaviour
     {
         pm.sliding = true;
 
-        transform.DOScale(new Vector3(transform.localScale.x, slideYScale, transform.localScale.z), 0.25f);
         rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
 
         inputDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
@@ -104,8 +100,6 @@ public class sliding : MonoBehaviour
     private void StopSlide()
     {
         pm.sliding = false;
-
-        transform.DOScale(new Vector3(transform.localScale.x, startYScale, transform.localScale.z), 0.25f);
     }
 
     private void OnDrawGizmos()
