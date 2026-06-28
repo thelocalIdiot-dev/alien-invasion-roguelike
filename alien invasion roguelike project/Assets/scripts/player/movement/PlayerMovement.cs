@@ -99,9 +99,9 @@ public class playerMovement : MonoBehaviour
         GetInput();
         stateHandler();
         playerAnimation();
-        if(speedText != null )
+        if(speedText != null)
         {
-            speedText.SetText(rb.velocity.magnitude.ToString());
+            speedText.SetText(((int)rb.velocity.magnitude).ToString());
         }
 
         if (States == STATES.idle)
@@ -126,7 +126,7 @@ public class playerMovement : MonoBehaviour
         animator.SetFloat("Speed", flatVel.magnitude / runSpeed);
         animator.SetFloat("Y speed", rb.velocity.y);
         animator.SetBool("grounded", grounded());
-        animator.SetBool("sliding", sliding);
+        animator.SetBool("sliding", sliding && grounded());
 
     }
 
@@ -187,7 +187,7 @@ public class playerMovement : MonoBehaviour
         }
         
 
-        if (Input.GetKey(KeyCode.Space) && grounded() && readyToJump)
+        if (Input.GetKeyDown(KeyCode.Space) && grounded() && readyToJump)
         {
             jump();
 
@@ -196,7 +196,7 @@ public class playerMovement : MonoBehaviour
             Invoke(nameof(ResetJump), jumpCooldown);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && canDoubleJump && States != STATES.wallrunning)
+        if (Input.GetKeyDown(KeyCode.Space) && canDoubleJump && States != STATES.wallrunning && !grounded())
         {
             jump();
 
@@ -247,6 +247,8 @@ public class playerMovement : MonoBehaviour
     }
     void jump()
     {
+        rb.drag = 0;
+
         exitingSlope = true;
 
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
