@@ -104,7 +104,7 @@ public class playerMovement : MonoBehaviour
             speedText.SetText(((int)rb.velocity.magnitude).ToString());
         }
 
-        if (States == STATES.idle)
+        if (States == STATES.idle && !exitingSlope)
         {
             rb.drag = groundDrag;
         }
@@ -182,10 +182,24 @@ public class playerMovement : MonoBehaviour
     {
         if (States != STATES.dashing && States != STATES.sliding && States != STATES.wallrunning)
         {
-            horizontalInput = Input.GetAxisRaw("Horizontal");
-            verticalInput = Input.GetAxisRaw("Vertical");
+            if (ChainSwords.instance.attacking)
+            {
+                horizontalInput = 0;
+                verticalInput = 0;
+            }
+            else
+            {
+                horizontalInput = Input.GetAxisRaw("Horizontal");
+                verticalInput = Input.GetAxisRaw("Vertical");
+            }
+           
         }
-        
+
+        if (ChainSwords.instance.attacking)
+        {
+            horizontalInput = 0;
+            verticalInput = 0;
+        }
 
         if (Input.GetKeyDown(KeyCode.Space) && grounded() && readyToJump)
         {

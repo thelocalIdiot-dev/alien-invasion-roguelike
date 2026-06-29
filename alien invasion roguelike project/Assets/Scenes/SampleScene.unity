@@ -5235,8 +5235,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 87631563}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -11353,7 +11353,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1006718728
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11556,7 +11556,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1145168633}
   serializedVersion: 8
-  lengthInSec: 5
+  lengthInSec: 100
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -11630,9 +11630,9 @@ ParticleSystem:
     enabled: 1
     startLifetime:
       serializedVersion: 2
-      minMaxState: 3
-      scalar: 0.2
-      minScalar: 0.3
+      minMaxState: 0
+      scalar: 3
+      minScalar: 2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -12183,7 +12183,7 @@ ParticleSystem:
     angle: 0
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 0.3
+    radiusThickness: 1
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
@@ -12266,7 +12266,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 3
+      value: 4.93
       mode: 0
       spread: 0
       speed:
@@ -12385,7 +12385,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 100
+      scalar: 200
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -16283,7 +16283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 823cbba8cf8a8fa46af6b9c5b1ebe8ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decrease: 0.1
+  decrease: 0.01
   Time: 1
 --- !u!1 &1203095340
 GameObject:
@@ -16539,7 +16539,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1291575890
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17058,7 +17058,7 @@ RectTransform:
   m_Father: {fileID: 1239121584}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -17143,10 +17143,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1801466409}
-  - component: {fileID: 1801466410}
   - component: {fileID: 1801466411}
+  - component: {fileID: 1801466410}
   - component: {fileID: 1801466413}
-  - component: {fileID: 1801466412}
+  - component: {fileID: 1801466414}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -17213,7 +17213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runSpeed: 20
   groundDrag: 10
-  playerheight: 3
+  playerheight: 1.5
   WhatIsGround:
     serializedVersion: 2
     m_Bits: 8
@@ -17222,7 +17222,7 @@ MonoBehaviour:
   maxSlopeAngle: 50
   exitingSlope: 0
   wallrunSpeed: 500
-  jumpforce: 12
+  jumpforce: 30
   jumpCooldown: 0.5
   airMultiplier: 0.4
   canDoubleJump: 0
@@ -17238,21 +17238,6 @@ MonoBehaviour:
   wallrunning: 0
   States: 0
   jumpSmoke: {fileID: 2180614815655768216, guid: c4c561c1da962bf48acecfd9857dfa30, type: 3}
---- !u!114 &1801466412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1801466408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c7066774a8e7634984387406d1eb4a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dashForce: 50
-  dashCooldown: 0.1
-  orientation: {fileID: 1233407722}
 --- !u!114 &1801466413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17273,6 +17258,24 @@ MonoBehaviour:
   SlideStartDistance: 5.34
   slideKey: 306
   effect: 0
+--- !u!114 &1801466414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801466408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 745b0b17ac8b6d04d89ca86c55b64433, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 338453701}
+  equippingTime: 0
+  cooldownTime: 1
+  comboTime: 1.2
+  Timer: 0
+  slashSequence: []
 --- !u!1 &1839877163
 GameObject:
   m_ObjectHideFlags: 0
@@ -17443,7 +17446,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1854509107
 BoxCollider:
   m_ObjectHideFlags: 0

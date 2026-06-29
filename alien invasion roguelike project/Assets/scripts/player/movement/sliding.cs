@@ -43,7 +43,7 @@ public class sliding : MonoBehaviour
         bool canSlide = Physics.Raycast(transform.position, Vector3.down, SlideStartDistance, pm.WhatIsGround);
         Debug.Log(canSlide);
 
-        if (Input.GetKeyDown(slideKey) && (horizontalInput != 0 || verticalInput != 0) && canSlide)
+        if (Input.GetKeyDown(slideKey) && (horizontalInput != 0 || verticalInput != 0) && canSlide && !ChainSwords.instance.attacking)
         {
             StartSlide();
             rb.velocity = new Vector3(rb.velocity.x, -12, rb.velocity.z);
