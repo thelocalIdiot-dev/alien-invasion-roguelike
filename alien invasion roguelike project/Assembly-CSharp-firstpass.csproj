@@ -60,14 +60,14 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.18f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModulePhysics2D.cs" />
-    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
     <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModulePhysics.cs" />
-    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
     <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
     <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleAudio.cs" />
     <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleSprite.cs" />
     <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
+    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModulePhysics2D.cs" />
+    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
+    <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Plugins\Demigiant\DOTween\DOTween.XML" />
@@ -927,6 +927,10 @@
       <HintPath>Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.VisualEffectGraph.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualEffectGraph.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
       <Private>False</Private>
@@ -1017,6 +1021,10 @@
     </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
       <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualEffectGraph.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualEffectGraph.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">

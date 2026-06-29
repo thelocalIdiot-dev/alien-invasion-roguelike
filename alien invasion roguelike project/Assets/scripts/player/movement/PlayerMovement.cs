@@ -210,18 +210,18 @@ public class playerMovement : MonoBehaviour
             Invoke(nameof(ResetJump), jumpCooldown);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && canDoubleJump && States != STATES.wallrunning && !grounded())
-        {
-            jump();
-
-            rb.AddForce(transform.up * jumpforce, ForceMode.Impulse);
-
-            canDoubleJump = false;
-        }
-        if (grounded())
-        {
-            canDoubleJump = true;
-        }
+       // if (Input.GetKeyDown(KeyCode.Space) && canDoubleJump && States != STATES.wallrunning && !grounded())
+       // {
+       //     jump();
+       //
+       //     rb.AddForce(transform.up * jumpforce, ForceMode.Impulse);
+       //
+       //     canDoubleJump = false;
+       // }
+       // if (grounded())
+       // {
+       //     canDoubleJump = true;
+       // }
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6504c3706973d9438b9d02a5f528f45, type: 3}
   m_Name: slash 2
   m_EditorClassIdentifier: 
-  controller: {fileID: 0}
+  controller: {fileID: 22100000, guid: 6437112c63f670b44815ffeda1f46634, type: 2}
+  duration: 0.4
+  damage: 10
+  right: 0

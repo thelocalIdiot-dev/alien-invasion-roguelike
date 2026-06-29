@@ -209,6 +209,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.14195144
+        functionName: slashEffect
+        data: right
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.5376044
         functionName: colliderOff
         data: 
@@ -273,6 +280,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.46290484
+        functionName: slashEffect
+        data: left
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -305,6 +319,13 @@ ModelImporter:
       - time: 0.47446606
         functionName: colliderOn
         data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.7257974
+        functionName: slashEffect
+        data: right
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
