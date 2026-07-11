@@ -266,6 +266,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.5234311
+        functionName: slashEffect
+        data: left
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.79758584
         functionName: colliderOff
         data: 
@@ -276,13 +283,6 @@ ModelImporter:
       - time: 1
         functionName: endAttack
         data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.46290484
-        functionName: slashEffect
-        data: left
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
@@ -323,14 +323,14 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.7257974
+      - time: 0.73106056
         functionName: slashEffect
         data: right
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.7678736
+      - time: 0.7599789
         functionName: colliderOff
         data: 
         objectReferenceParameter: {instanceID: 0}

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "new attack", menuName = "scriptable objects/attack")]
+[CreateAssetMenu(fileName = "new attack", menuName = "scriptable objects/chainsword attack")]
 public class attackSO : ScriptableObject
 {
     [Header("references")]

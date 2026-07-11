@@ -7,8 +7,7 @@ public class EnemyHealth : MonoBehaviour
     [Header("stun stuff")]
     public bool stuned;   
     public float stunDuration;   
-    public float stunTimer;   
-    
+    public float stunTimer;      
 
     [Header("Flash")]
     [SerializeField] private Material flashMaterial;
@@ -36,8 +35,12 @@ public class EnemyHealth : MonoBehaviour
     private Material[][] originalMaterials;
     private Coroutine flashRoutine;
 
+    EnemyReferences EF;
+
     void Awake()
     {
+        EF = GetComponent<EnemyReferences>();
+
         currentHealth = maxHealth;
 
         // Get ALL renderers (MeshRenderer + SkinnedMeshRenderer)
@@ -162,14 +165,14 @@ public class EnemyHealth : MonoBehaviour
     }
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.yellow;
-        if (bloodPosition != null)
-        {
-            Gizmos.DrawWireSphere(bloodPosition.position, offset);
-        }
-        else
-        {
-            Gizmos.DrawWireSphere(transform.position, offset);
-        }
+       // Gizmos.color = Color.yellow;
+       // if (bloodPosition != null)
+       // {
+       //     Gizmos.DrawWireSphere(bloodPosition.position, offset);
+       // }
+       // else
+       // {
+       //     Gizmos.DrawWireSphere(transform.position, offset);
+       // }
     }
 }
